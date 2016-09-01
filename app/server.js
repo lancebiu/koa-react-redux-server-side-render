@@ -17,9 +17,9 @@ import thunkMiddleware from 'redux-thunk';
 import {Provider} from 'react-redux';
 import rootReducer from './redux/rootReducer';
 
-var app = koa();
+const app = koa();
 
-var readFile = thunkify(fs.readFile);
+const readFile = thunkify(fs.readFile);
 
 // static file serving
 app.use(staticCache('./app/public', {
