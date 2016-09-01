@@ -1,24 +1,23 @@
 {
-  "name": "react-redux-server-render",
+  "name": "koa-react-redux-server-side-render",
   "version": "1.0.0",
-  "description": "a demo for react server render",
-  "main": "gulpfile.js",
+  "description": "Example of an react application with server-side rendering.",
+  "main": "server.js",
   "scripts": {
-    "browserSync": "gulp browserSync",
     "webpack": "webpack --watch --progress --colors",
-    "server": "babel-watch src/server.js",
-    "start": "run-p webpack browserSync"
+    "server": "babel-watch app/server.js",
+    "start": "run-p webpack server"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lancebiu/react-redux-server-render.git"
+    "url": "git+https://github.com/lancebiu/koa-react-redux-server-side-render.git"
   },
-  "author": "",
+  "author": "lancebiu",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/lancebiu/react-redux-server-render/issues"
+    "url": "https://github.com/lancebiu/koa-react-redux-server-side-render/issues"
   },
-  "homepage": "https://github.com/lancebiu/react-redux-server-render#readme",
+  "homepage": "https://github.com/lancebiu/koa-react-redux-server-side-render#readme",
   "devDependencies": {
     "babel": "^6.5.2",
     "babel-cli": "^6.14.0",
@@ -28,7 +27,6 @@
     "babel-preset-latest": "^6.14.0",
     "babel-preset-react": "^6.11.1",
     "babel-watch": "^2.0.2",
-    "browser-sync": "^2.14.3",
     "css-loader": "^0.24.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
@@ -46,6 +44,7 @@
     "koa": "^1.2.2",
     "koa-ejs": "^3.0.0",
     "koa-route": "^2.4.2",
+    "koa-static-cache": "^3.1.7",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
     "react-redux": "^4.4.5",

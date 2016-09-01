@@ -4,11 +4,11 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const ROOT = '.';
 
-const APP_FOLDER = PATH.resolve(__dirname, ROOT, 'src/');
+const APP_FOLDER = PATH.resolve(__dirname, ROOT, 'app/');
 const APP_ENTRY_FILE = PATH.resolve(__dirname, ROOT, APP_FOLDER, 'client.js');
 
-const BUILD_FOLDER = PATH.resolve(__dirname, ROOT, 'dist/');
-const BUILD_FILE = '/js/bundle.min.js';
+const BUILD_FOLDER = PATH.resolve(__dirname, ROOT, 'app/public');
+const BUILD_FILE = '/js/app.min.js';
 
 module.exports = {
 
@@ -24,7 +24,7 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: 'babel-loader',
                 query: {
-                    presets: ['react', 'es2015', 'stage-0']
+                    presets: ['react', 'react']
                 }
             },
             {

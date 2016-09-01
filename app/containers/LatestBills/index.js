@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router';
 
 import {fetchLatestBills} from './actions';
 
-class LatestBills extends Component{
+class LatestBills extends Component {
 
     static fetchData({store}) {
         return store.dispatch(fetchLatestBills());
@@ -16,13 +17,17 @@ class LatestBills extends Component{
     render() {
         return (
             <div>
-                <h1>最新账单</h1>
-                {
-                    this.props.isFetching && <p>加载中。。。</p>
-                }
+                <h1>Latest Bills</h1>
+                {this.props.isFetching && <p>Loaing...</p>}
                 {
                     !this.props.isFetching &&
-                    <p>{this.props.bills.length}</p>
+                    <ul>
+                        {
+                            this.props.bills.map(bill =>
+                                <li key={bill.id}><Link to={`/bill/${bill.id}`}>{bill.vendor}</Link></li>
+                            )
+                        }
+                    </ul>
                 }
             </div>
         )
