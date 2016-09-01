@@ -8,6 +8,7 @@ Checkout this repo, install dependencies, then start the koa server.
 
 ```
 git clone https://github.com/lancebiu/koa-react-redux-server-side-render.git
+cd koa-react-redux-server-side-render
 npm i
 npm start
 ```

@@ -25,19 +25,19 @@ class DetailedBill extends Component{
                     <table>
                         <tbody>
                         <tr>
-                            <td>id</td>
+                            <td>id:</td>
                             <td>{info.id}</td>
                         </tr>
                         <tr>
-                            <td>amount</td>
+                            <td>amount:</td>
                             <td>{info.amount}</td>
                         </tr>
                         <tr>
-                            <td>paymeans</td>
+                            <td>paymeans:</td>
                             <td>{info.paymeans}</td>
                         </tr>
                         <tr>
-                            <td>period</td>
+                            <td>period:</td>
                             <td>{info.period}</td>
                         </tr>
                         </tbody>
