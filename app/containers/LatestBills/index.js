@@ -6,12 +6,13 @@ import {fetchLatestBills} from './actions';
 
 class LatestBills extends Component {
 
-    static fetchData({store}) {
-        return store.dispatch(fetchLatestBills());
+    static fetchData({dispatch}) {
+        return dispatch(fetchLatestBills());
     }
 
     componentDidMount() {
-        this.props.dispatch(fetchLatestBills());
+        const {dispatch, isFetching} = this.props;
+        this.constructor.fetchData({dispatch});
     }
 
     render() {

@@ -36,19 +36,20 @@ render(app, {
 
 const reactView = function *() {
 
-    const matched = yield thunkify(match)({routes, location: this.request.url});
-    const renderProps = matched[1];
+    const [redirectLocation, renderProps] = yield thunkify(match)({routes, location: this.request.url});
 
     const store = applyMiddleware(
         thunkMiddleware
     )(createStore)(rootReducer, {});
 
     const components = renderProps.components.filter(
-        component => (typeof component.fetchData === 'function')
+        component => typeof component.fetchData === 'function'
     );
 
-    const promises = components.map(
-        component => component.fetchData({store, params: renderProps.params})
+    const promises = components.map(component =>
+        component.fetchData({
+            dispatch:store.dispatch, params: renderProps.params
+        })
     )
 
     yield Promise.all(promises);
