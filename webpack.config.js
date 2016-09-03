@@ -1,51 +1,52 @@
-const PATH = require('path');
+const path = require('path');
 var webpack = require('webpack');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var merge = require('webpack-merge');
+var validate = require('webpack-validator');
 
-const ROOT = '.';
+const tools = require('./tools/webpackTools');
 
-const APP_FOLDER = PATH.resolve(__dirname, ROOT, 'app/');
-const APP_ENTRY_FILE = PATH.resolve(__dirname, ROOT, APP_FOLDER, 'client.js');
+const PATHS = {
+    app: path.resolve(__dirname, 'app', 'client.js'),
+    build: path.resolve(__dirname, 'app', 'public')
+}
 
-const BUILD_FOLDER = PATH.resolve(__dirname, ROOT, 'app/public');
-const BUILD_FILE = '/js/app.min.js';
-
-module.exports = {
-
-    entry: APP_ENTRY_FILE,
+const common = {
+    entry: {
+        app: PATHS.app
+    },
     output: {
-        path: BUILD_FOLDER,
-        filename: BUILD_FILE
-    },
-    module: {
-        loaders: [
-            {
-                test: /\.js[x]?$/,
-                exclude: /node_modules/,
-                loader: 'babel-loader',
-                query: {
-                    presets: ['react', 'react']
-                }
-            },
-            {
-                test: /\.json$/,
-                loader: 'json-loader'
-            },
-            {
-                test: /\.scss$/,
-                loader: ExtractTextPlugin.extract('style-loader', 'css!sass')
-            },
-            {
-                test: /\.(otf|woff|woff2|eot|ttf|svg)$/,
-                loader: 'url-loader?limit=100000&name=fonts/[name].[ext]'
-            },
-            {
-                test: /\.(png|jpg|jpeg|gif)$/,
-                loader: 'url-loader?limit=8192&name=img/[name].[ext]'
-            }
-        ]
-    },
-    plugins: [
-        new ExtractTextPlugin("/css/style.min.css")
-    ]
+        path: PATHS.build,
+        filename: 'js/[name].js'
+    }
 };
+
+var config;
+
+switch (process.env.npm_lifecycle_event) {
+    case 'build':
+        config = merge(common,
+            {devtool: 'source-map'},
+            tools.setFreeVariable('process.env.NODE_ENV', 'production'),
+            tools.literReact(),
+            tools.setupJSX(),
+            tools.setupFonts(),
+            tools.setupImage(),
+            tools.setupJson(),
+            tools.extractStyle('css/style.css'),
+            tools.uglify()
+        )
+        break;
+    default:
+        config = merge(common,
+            {devtool: 'eval-source-map'},
+            tools.setupJSX(),
+            tools.setupStyle(),
+            tools.setupFonts(),
+            tools.setupImage(),
+            tools.setupJson()
+        );
+}
+
+module.exports = validate(config, {
+    quiet: true
+});
