@@ -5,9 +5,9 @@
   "main": "server.js",
   "scripts": {
     "webpack": "webpack --watch --progress --colors",
-    "server": "babel-watch app/server.js",
+    "server": "babel-node app/server.js",
     "build": "webpack",
-    "start": "run-p webpack server",
+    "start": "run-p webpack server"
   },
   "repository": {
     "type": "git",
